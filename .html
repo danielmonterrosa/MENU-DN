@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DN Licores Express - Menú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(218, 165, 32, 0.15) 0%, transparent 50%);
+        }
+
+        .logo-container {
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 15px 40px rgba(218, 165, 32, 0.5),
+                inset 0 0 30px rgba(218, 165, 32, 0.1);
+            border: 5px solid #DAA520;
+            position: relative;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 15px 40px rgba(218, 165, 32, 0.5), inset 0 0 30px rgba(218, 165, 32, 0.1); }
+            50% { box-shadow: 0 15px 50px rgba(218, 165, 32, 0.7), inset 0 0 40px rgba(218, 165, 32, 0.2); }
+        }
+
+        .logo-circle {
+            width: 85%;
+            height: 85%;
+            border: 7px solid white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-text-dn {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -8px;
+            line-height: 0.8;
+            text-shadow: 0 0 20px rgba(218, 165, 32, 0.5);
+        }
+
+        .logo-text-licores {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 3px;
+            margin-top: 8px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: #DAA520;
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 900;
+            text-shadow: 0 5px 15px rgba(218, 165, 32, 0.3);
+        }
+
+        .header p {
+            font-family: 'Montserrat', sans-serif;
+            color: #DAA520;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+
+        .menu-section {
+            padding: 50px 40px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #000;
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #DAA520;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 900;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
+            border-radius: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid #DAA520;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #DAA520;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .menu-item:hover::before {
+            left: 100%;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(218, 165, 32, 0.4);
+            border-color: #FFD700;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #000;
+            flex: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #DAA520;
+            white-space: nowrap;
+            text-shadow: 0 2px 5px rgba(218, 165, 32, 0.2);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: #DAA520;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer p {
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .footer p:first-child {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .decorative-dots {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        .decorative-dots.top-right {
+            top: 30px;
+            right: 30px;
+        }
+
+        .decorative-dots.bottom-left {
+            bottom: 30px;
+            left: 30px;
+        }
+
+        .dot-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #DAA520;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+            
+            .logo {
+                width: 160px;
+                height: 160px;
+            }
+
+            .logo-text-dn {
+                font-size: 64px;
+            }
+
+            .logo-text-licores {
+                font-size: 12px;
+            }
+            
+            .menu-section {
+                padding: 30px 20px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .category-title {
+                font-size: 24px;
+            }
+            
+            .item-name {
+                font-size: 15px;
+            }
+            
+            .item-price {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="decorative-dots top-right">
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+            </div>
+
+            <div class="decorative-dots bottom-left">
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+                <div class="dot-row"><div class="dot"></div><div class="dot"></div></div>
+            </div>
+
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-circle">
+                        <div class="logo-text-dn">DN</div>
+                        <div class="logo-text-licores">LICORES EXPRESS</div>
+                    </div>
+                </div>
+            </div>
+            <h1>DN LICORES</h1>
+            <p>Premium Selection & Express Delivery</p>
+        </div>
+
+        <div class="menu-section">
+            <h2 class="section-title">CARTA PREMIUM</h2>
+            
+            <!-- LICORES -->
+            <div class="category">
+                <h3 class="category-title">LICORES</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">GARRAFÓN ANTIOQUEÑO</span>
+                            <span class="item-price">$180.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">TETRA AGUARDIENTE</span>
+                            <span class="item-price">$100.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">LITRO AGUARDIENTE</span>
+                            <span class="item-price">$110.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">DOBLE AGUARDIENTE</span>
+                            <span class="item-price">$90.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SENCILLA AGUARDIENTE</span>
+                            <span class="item-price">$55.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">GARRAFÓN MEDELLÍN</span>
+                            <span class="item-price">$200.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">MEDELLÍN 8 AÑOS</span>
+                            <span class="item-price">$130.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">TETRA MEDELLÍN</span>
+                            <span class="item-price">$110.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SENCILLA MEDELLÍN</span>
+                            <span class="item-price">$55.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">REAL TETRA</span>
+                            <span class="item-price">$80.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">REAL DOBLE</span>
+                            <span class="item-price">$70.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">CALDAS AMARILLO</span>
+                            <span class="item-price">$80.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">RON VIEJO DE CALDAS</span>
+                            <span class="item-price">$80.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CERVEZAS -->
+            <div class="category">
+                <h3 class="category-title">CERVEZAS</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">CORONITA</span>
+                            <span class="item-price">$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">POKERCITAS</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">ÁGUILA NEGRA</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">ÁGUILA LIGHT</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">COSTEÑITA</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">COSTEÑA LATA</span>
+                            <span class="item-price">$3.500</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">CLUB COLOMBIA</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUDWEISER LATA</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">HEINEKEN</span>
+                            <span class="item-price">$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">STELLA ARTOIS</span>
+                            <span class="item-price">$7.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">RED LATA</span>
+                            <span class="item-price">$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUDWEISER BOTELLA</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">KOLA Y POLA</span>
+                            <span class="item-price">$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">CORONA LATA</span>
+                            <span class="item-price">$5.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">CORONA GRANDE</span>
+                            <span class="item-price">$7.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHISKY -->
+            <div class="category">
+                <h3 class="category-title">WHISKY</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BLACK LABEL</span>
+                            <span class="item-price">$250.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUCHANAN'S 18 AÑOS</span>
+                            <span class="item-price">$500.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">OLD PARR 500ML</span>
+                            <span class="item-price">$200.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUCHANAN'S DELUXE LITRO</span>
+                            <span class="item-price">$320.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUCHANAN'S DELUXE 750ML</span>
+                            <span class="item-price">$250.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUCHANAN'S MASTER 750ML</span>
+                            <span class="item-price">$270.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">BUCHANAN'S MASTER LITRO</span>
+                            <span class="item-price">$320.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">OLD PARR 750ML</span>
+                            <span class="item-price">$270.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">OLD PARR LITRO</span>
+                            <span class="item-price">$320.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">RED LABEL</span>
+                            <span class="item-price">$250.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TEQUILA -->
+            <div class="category">
+                <h3 class="category-title">TEQUILA</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">DON JULIO 70</span>
+                            <span class="item-price">$500.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">DON JULIO 700</span>
+                            <span class="item-price">$320.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VODKA -->
+            <div class="category">
+                <h3 class="category-title">VODKA</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SMIRNOFF ROJA</span>
+                            <span class="item-price">$10.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SMIRNOFF VERDE</span>
+                            <span class="item-price">$12.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SMIRNOFF DE TAMARINDO</span>
+                            <span class="item-price">$100.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>            <!-- HIDRATANTE -->
+            <div class="category">
+                <h3 class="category-title">HIDRATANTE</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">AGUA</span>
+                            <span class="item-price">$3.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SODA</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">JUGO HIT</span>
+                            <span class="item-price">$3.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">PEPSI</span>
+                            <span class="item-price">$2.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">GATORADE</span>
+                            <span class="item-price">$6.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">HIDRALIGHT</span>
+                            <span class="item-price">$10.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">ELECTROLIT</span>
+                            <span class="item-price">$12.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">SPEED MAX</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEKATOS ADICIONALES -->
+            <div class="category">
+                <h3 class="category-title">MEKATOS ADICIONALES</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">PAPAS MARGARITA</span>
+                            <span class="item-price">$3.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">DETODITO</span>
+                            <span class="item-price">$4.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">MANÍ</span>
+                            <span class="item-price">$3.000</span>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">DORITOS</span>
+                            <span class="item-price">$3.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIP -->
+            <div class="category">
+                <h3 class="category-title">VIP</h3>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <span class="item-name">RESERVA ANTICIPADA</span>
+                            <span class="item-price">$100.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>✨ GRACIAS POR PREFERIRNOS ✨</p>
+            <p style="margin-top: 10px; font-size: 14px;">DN LICORES EXPRESS - DOMICILIOS RÁPIDOS</p>
+        </div>
+    </div>
+</body>
+</html>
